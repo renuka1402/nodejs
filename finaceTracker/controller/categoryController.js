@@ -5,7 +5,6 @@ exports.listCategories = async (req, res) => {
         const categories = await Category.find({ user: req.user.id, isDeleted: false });
 
         res.render('categories', {
-           
             categories,
             error: null
         });
@@ -21,25 +20,21 @@ exports.listCategories = async (req, res) => {
 exports.createCategory = async (req, res) => {
     try {
         const { name } = req.body;
+        const userId = req.user.id;
 
         if (!name || !name.trim()) {
-            const categories = await Category.find({ user: req.user.id, isDeleted: false });
-            return res.render('categories', {
-              
-                categories,
-                error: 'Name is required!'
-            });
+            req.flash('error', 'Name is required!');
+            return res.redirect('/categories');
         }
 
-        await new Category({
+        await Category.create({
             name: name.trim(),
-            user: req.user.id,
+            user: userId,
             isDeleted: false
-        }).save();
+        });
 
         res.redirect('/categories');
     } catch (err) {
         res.redirect('/categories');
     }
 };
-
