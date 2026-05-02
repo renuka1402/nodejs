@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+
+
+<div class="budget-container">
+    <div class="grid">
+        
+        <div class="card">
+            
+            <form action="/budgets" method="POST">
+                <div class="form-group">
+                    <label>Budget Name</label>
+                    <input type="text" name="name" placeholder="name" required>
+                </div>
+
+                <div>
+                    <label>Category</label>
+                    <select name="categories" required>
+                        <% categories.forEach(cat => { %>
+                            <option value="<%= cat._id %>"><%= cat.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Amount (INR)</label>
+                    <input type="number" name="amount" placeholder="5000" required>
+                </div>
+ <label>Time Frame:</label>
+                <select name="timeframe" style="padding: 8px;">
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+                <button type="submit" class="btn">Save Budget</button>
+            </form>
+        </div>
+
+        <div>
+            <h3 style="margin-top:0">Active Budgets</h3>
+            <% if (budgetCards.length > 0) { %>
+                <% budgetCards.forEach((budget) => { %>
+                    <div class="budget-item">
+                        <div>
+                            <span class="category-tag"><%= budget.categoryName %></span>
+                            <div style="margin-top:8px" class="progress-info">
+                                <b>â‚¹<%= budget.spent %></b> spent of â‚¹<%= budget.limit %>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="font-weight: bold; font-size: 18px;"><%= budget.percent %>%</span>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p >No budgets found.</p>
+            <% } %>
+        </div>
+
+    </div>
+</div>
+
+<%- include('partials/footer') %>

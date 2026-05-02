@@ -1,0 +1,113 @@
+<%- include("header") %>
+
+<style>
+    .feed-container {
+        max-width: 800px;
+        margin: 20px auto;
+     
+    }
+    .post-card {
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    .post-title {
+        color: #222;
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    .post-category {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 5px 0 15px 0;
+    }
+    .post-img {
+        width: 50px;
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    .post-meta {
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+    .btn {
+  
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        display: inline-block;
+    }
+   
+    
+    .post-divider {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 30px 0;
+    }
+    .pagination {
+        text-align: center;
+        padding: 20px;
+    }
+   
+</style>
+
+<header style="text-align: center; padding: 20px;">
+    <h1>Latest Blogs</h1>
+</header>
+     <a href="/create" class="nav-item">Create Post</a>
+       <section class="search-section">
+    <form action="/" method="get" class="search-form">
+      <input type="text" name="search" placeholder="Search " required />
+      <button type="submit">Search</button>
+    </form>
+  </section>
+<main class="feed-container">
+    <% if (posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+            <div class="post-card">
+                <h3 class="post-title">Post Title: <%= post.title %></h3>
+                
+                <p class="post-category">Category: <%= post.category %></p>
+                
+              <% if(post.image) { %>
+  
+    <img src="/uploads/<%= post.image %>" class="post-img" alt="post img">
+<% } %>
+
+                <p>blog:<%= post.content.substring(0, 150) %>...</p>
+                
+                <div class="post-meta">
+                    By: <strong><%= post.author %></strong> | <%= post.createdAt.toDateString() %>
+                </div>
+
+                <div class="post-actions">
+                    <a href="/post/<%= post._id %>" class="btn btn-view">View Full Post</a>
+                    <a href="/edit/<%= post._id %>" class="btn btn-edit">Edit</a>
+                </div>
+            </div>
+
+            <hr class="post-divider">
+            
+        <% }) %>
+    <% } else { %>
+        <p style="text-align: center;">No posts available yet.</p>
+    <% } %>
+    <div>
+        <% if(currentPage>1){%>
+            <a href ="/?page=<%=currentPage-1%>&search=<%=search%>">
+                previous
+            </a>
+        <%}%>
+        <span>page =<%=currentPage %> of <%= totalPage %></span>
+       
+    <% if (currentPage < totalPage) { %>
+        <a href="/?page=<%= currentPage + 1 %>&search=<%= search %>" >
+         
+           Next
+        </a>
+        <%}%>
+    </div>
+</main>
+

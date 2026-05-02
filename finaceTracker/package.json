@@ -1,0 +1,27 @@
+{
+  "name": "personal-finance-tracker",
+  "version": "1.0.0",
+  "description": "EJS + Express personal finance tracker with auth, budgets, reports, reminders, and profile management.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^2.2.2",
+    "chart.js": "^4.5.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "joi": "^18.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.1.0",
+    "multer": "^2.0.2",
+    "pdfkit": "^0.18.0",
+    "web-push": "^3.6.7"
+  }
+}

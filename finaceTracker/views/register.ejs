@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+   
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        form { max-width: 400px; background:  padding: 20px;  }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { margin-top: 15px; padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+ 
+    <h2>Create Account</h2>
+
+    <% if (flash.error && flash.error.length) { %>
+        <p class="error"><%= flash.error[0] %></p>
+    <% } %>
+    <% if (flash.success && flash.success.length) { %>
+        <p class="success"><%= flash.success[0] %></p>
+    <% } %>
+
+    <form method="POST" action="/register" >
+        
+        <label>Full Name</label>
+        <input type="text" name="fullName" placeholder="Your Name" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="mail@example.com" required>
+
+        <label>Username (optional)</label>
+        <input type="text" name="username">
+
+       
+
+        <label>Date of Birth</label>
+        <input type="date" name="dateOfBirth">
+
+        <label>Phone Number</label>
+        <input type="text" name="phone">
+
+        <label>Address</label>
+        <textarea name="address" rows="2"></textarea>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Register Now</button>
+    </form>
+
+    <p>Already have an account? <a href="/login">Login here</a></p>
+</body>
+</html>

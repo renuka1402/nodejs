@@ -1,0 +1,45 @@
+<%- include("header") %>
+
+<main class="container">
+  <section class="form-wrapper">
+    <div class="form-header">
+      <h2>Create New Post</h2>
+      <p>Share your thoughts with the world.</p>
+    </div>
+
+    <form action="/create" method="post" class="blog-form" enctype="multipart/form-data">
+      
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Enter blog title" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Author</label>
+          <input type="text" name="author" value="<%= user.email %>" readonly class="readonly-input">
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" name="category" placeholder="e.g. Tech, Travel" required>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label>Blog Content</label>
+        <textarea name="content" placeholder="Write your content here..." required></textarea>
+      </div>
+<div class="form-group">
+    <label>Upload Image</label>
+    <input type="file" name="image" accept="image/*" required>
+  </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Publish Post</button>
+        <a href="/" class="btn-cancel">Cancel</a>
+      </div>
+
+    </form>
+  </section>
+</main>

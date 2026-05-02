@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+
+<div>
+    <h2>Add New Transaction</h2>
+
+    <% if (error) { %>
+        <p><%= error %></p>
+    <% } %>
+
+    <form action="/transaction/add" method="POST">
+        
+        <div>
+            <label>Type</label>
+            <select name="type" >
+                <option value="income">Income (+)</option>
+                <option value="expense" selected>Expense (-)</option>
+            </select>
+        </div>
+
+        <div>
+            <label >Category</label>
+            <select name="category" required >
+                <option value="" disabled selected>Select a category</option>
+                <% if (categories && categories.length > 0) { %>
+                    <% categories.forEach((cat) => { %>
+                        <option value="<%= cat._id %>"><%= cat.name %></option>
+                    <% }) %>
+                <% } else { %>
+                    <option disabled>No categories found</option>
+                <% } %>
+            </select>
+        </div>
+
+        <div>
+            <label>Amount (INR)</label>
+            <input type="number" name="amount" placeholder="0.00" required style="width: 100%; padding: 8px;">
+        </div>
+
+        <div>
+            <label >Date</label>
+            <input type="date" name="date" style="width: 100%; padding: 8px;">
+        </div>
+
+        <div>
+            <label >Notes</label>
+            <textarea name="notes" rows="3" placeholder="notes" style="width: 100%; padding: 8px;"></textarea>
+        </div>
+
+        <div >
+            <button type="submit" >Save Transaction</button>
+            <a href="/dashboard" >Cancel</a>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/footer') %>

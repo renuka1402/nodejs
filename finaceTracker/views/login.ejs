@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/app.css"> 
+</head>
+<body>
+    <div class="page">
+        <main class="main-content">
+            <section class="simple-section">
+                <h2>Login</h2>
+                
+                <% if (flash.error && flash.error.length) { %>
+                    <p class="message error"><%= flash.error[0] %></p>
+                <% } %>
+                <% if (flash.success && flash.success.length) { %>
+                    <p class="message success"><%= flash.success[0] %></p>
+                <% } %>
+
+                <form class="simple-form" method="POST" action="/login">
+                    <label for="loginEmail">Email address</label>
+                    <input id="loginEmail" type="email" name="email" placeholder="example@mail.com" required>
+                    
+                    <label for="loginPassword">Password</label>
+                    <input id="loginPassword" type="password" name="password" placeholder="Enter password" required>
+
+                    <button type="submit">Sign in</button>
+                </form>
+
+                <p>New here? <a href="/register">Create an account</a></p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
